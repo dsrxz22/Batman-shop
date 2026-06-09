@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Fraud Detection</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="navbar-brand">🏦 Banking Fraud Detection</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Single Detection</a></li>
+                <li><a href="dashboard.html" class="active">Dashboard</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <section class="hero">
+                <h1>System Dashboard</h1>
+                <p>Real-time fraud detection statistics and monitoring</p>
+            </section>
+
+            <!-- Statistics Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Total Transactions Analyzed</div>
+                    <div class="stat-value" id="totalTransactions">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Frauds Detected</div>
+                    <div class="stat-value" id="fraudsDetected">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Fraud Rate</div>
+                    <div class="stat-value" id="fraudRate">0%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Avg. Fraud Probability</div>
+                    <div class="stat-value" id="avgFraudProb">0%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">High Risk Transactions</div>
+                    <div class="stat-value" id="highRiskTxns">0</div>
+                </div>
+            </div>
+
+            <!-- Transaction History -->
+            <section class="analysis-section">
+                <h2>Recent Transactions</h2>
+                <div id="transactionHistory" class="transaction-history">
+                    <p style="text-align: center; color: var(--text-secondary);">No transactions yet</p>
+                </div>
+            </section>
+
+            <!-- Clear History -->
+            <section class="analysis-section">
+                <button class="btn-danger" onclick="clearHistory()">Clear Transaction History</button>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 Banking Fraud Detection AI | System Dashboard</p>
+        </footer>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>

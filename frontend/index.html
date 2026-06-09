@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banking Fraud Detection AI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="navbar-brand">🏦 Banking Fraud Detection</div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Single Detection</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <section class="hero">
+                <h1>Transaction Fraud Detection System</h1>
+                <p>AI-powered analysis for real-time fraud detection</p>
+            </section>
+
+            <!-- Single Transaction Analysis -->
+            <section class="analysis-section">
+                <h2>Analyze Single Transaction</h2>
+                
+                <form id="fraudForm" class="fraud-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="transactionId">Transaction ID</label>
+                            <input type="text" id="transactionId" placeholder="TXN-123456" value="TXN-123456">
+                        </div>
+                        <div class="form-group">
+                            <label for="amount">Amount ($)</label>
+                            <input type="number" id="amount" placeholder="100" value="150" step="0.01">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="merchantCategory">Merchant Category</label>
+                            <select id="merchantCategory">
+                                <option value="0">Electronics</option>
+                                <option value="1">Food & Dining</option>
+                                <option value="2">Gas & Fuel</option>
+                                <option value="3">Groceries</option>
+                                <option value="4">Entertainment</option>
+                                <option value="5">Travel</option>
+                                <option value="6">Healthcare</option>
+                                <option value="7">Shopping</option>
+                                <option value="8">Utilities</option>
+                                <option value="9">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="transactionType">Transaction Type</label>
+                            <select id="transactionType">
+                                <option value="0">Online</option>
+                                <option value="1">In-Store</option>
+                                <option value="2">ATM</option>
+                                <option value="3">Transfer</option>
+                                <option value="4">Mobile</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="timeHour">Time (Hour)</label>
+                            <input type="number" id="timeHour" min="0" max="23" placeholder="14" value="14">
+                        </div>
+                        <div class="form-group">
+                            <label for="daysSinceLastTransaction">Days Since Last Transaction</label>
+                            <input type="number" id="daysSinceLastTransaction" min="0" placeholder="5" value="5">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="transactionCount24h">Transactions in 24h</label>
+                            <input type="number" id="transactionCount24h" min="0" placeholder="3" value="3">
+                        </div>
+                        <div class="form-group">
+                            <label for="amountVariance">Amount Variance</label>
+                            <input type="number" id="amountVariance" placeholder="1.2" value="1.2" step="0.1">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="locationChange">Location Change</label>
+                            <select id="locationChange">
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="deviceChange">Device Change</label>
+                            <select id="deviceChange">
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="velocityScore">Velocity Score</label>
+                            <input type="number" id="velocityScore" placeholder="50" value="50" step="0.1">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-analyze">Analyze Transaction</button>
+                </form>
+            </section>
+
+            <!-- Results -->
+            <section id="resultsSection" class="results-section" style="display: none;">
+                <h2>Analysis Results</h2>
+                
+                <div id="resultCard" class="result-card">
+                    <div class="result-header">
+                        <span id="resultStatus" class="status-badge"></span>
+                        <span id="resultTimestamp" class="timestamp"></span>
+                    </div>
+                    
+                    <div class="result-body">
+                        <div class="probability-container">
+                            <div class="probability-item fraud">
+                                <span class="label">Fraud Probability</span>
+                                <div class="progress-bar">
+                                    <div id="fraudBar" class="progress-fill"></div>
+                                </div>
+                                <span id="fraudProb" class="percentage">0%</span>
+                            </div>
+                            
+                            <div class="probability-item legitimate">
+                                <span class="label">Legitimate Probability</span>
+                                <div class="progress-bar">
+                                    <div id="legitimateBar" class="progress-fill"></div>
+                                </div>
+                                <span id="legitimateProb" class="percentage">0%</span>
+                            </div>
+                        </div>
+
+                        <div class="risk-assessment">
+                            <h3>Risk Assessment</h3>
+                            <div id="riskLevel" class="risk-level"></div>
+                        </div>
+
+                        <div class="transaction-details">
+                            <h3>Transaction Details</h3>
+                            <table>
+                                <tr>
+                                    <td>Transaction ID</td>
+                                    <td id="detailTxnId"></td>
+                                </tr>
+                                <tr>
+                                    <td>Amount</td>
+                                    <td id="detailAmount"></td>
+                                </tr>
+                                <tr>
+                                    <td>Timestamp</td>
+                                    <td id="detailTime"></td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="action-buttons">
+                            <button class="btn-primary" onclick="approveTransaction()">✓ Approve</button>
+                            <button class="btn-danger" onclick="blockTransaction()">✕ Block</button>
+                            <button class="btn-secondary" onclick="reviewTransaction()">⚠ Review</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Error Message -->
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 Banking Fraud Detection AI | Real-time Fraud Analysis System</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
