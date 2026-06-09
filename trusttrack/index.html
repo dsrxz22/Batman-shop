@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrustTrack - Bank Account Reputation Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary: #f59e0b;
+            --secondary: #ff8c42;
+            --success: #10b981;
+            --danger: #ef4444;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+        }
+        
+        .gradient-orange-yellow {
+            background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+        }
+        
+        .gradient-orange-red {
+            background: linear-gradient(135deg, #ff8c42 0%, #ff6b6b 100%);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+            color: white;
+            font-weight: 600;
+            padding: 10px 24px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.4);
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            border: 2px solid #f59e0b;
+            color: #f59e0b;
+            font-weight: 600;
+            padding: 10px 24px;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline:hover {
+            background-color: #fffbeb;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 24px;
+            border-top: 4px solid;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            transform: translateY(-4px);
+        }
+        
+        .search-tabs button {
+            flex: 1;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .search-tabs button.active {
+            background: #f59e0b;
+            color: white;
+        }
+        
+        .search-tabs button.inactive {
+            background: #f3f4f6;
+            color: black;
+        }
+        
+        .search-tabs button.inactive:hover {
+            background: #e5e7eb;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 16px 24px;
+            font-size: 18px;
+            border: 2px solid #d1d5db;
+            border-radius: 12px;
+            background: white;
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: #f59e0b;
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 32px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+            transform: translateY(-8px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+        }
+        
+        .cta-button {
+            background: white;
+            color: #f59e0b;
+            font-weight: bold;
+            padding: 16px 32px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .cta-button:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fade {
+            animation: fadeIn 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 gradient-orange-yellow rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-lg">T</span>
+                </div>
+                <h1 class="text-2xl font-bold text-black">TrustTrack</h1>
+            </div>
+            <div class="flex space-x-4">
+                <button class="btn-outline">Login</button>
+                <button class="btn-primary">Sign Up</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 animate-fade">
+        <div class="text-center mb-12">
+            <h2 class="text-5xl md:text-6xl font-bold text-black mb-4">
+                Check Before You Send
+            </h2>
+            <p class="text-xl text-gray-600 mb-2">
+                Search thousands of bank accounts reported for scams and fraud
+            </p>
+            <p class="text-lg text-gray-500">
+                Community-driven reputation for financial safety
+            </p>
+        </div>
+
+        <!-- Search Form -->
+        <div class="max-w-2xl mx-auto mb-12">
+            <form onsubmit="handleSearch(event)" class="space-y-4">
+                <!-- Search Type Tabs -->
+                <div class="search-tabs flex space-x-4 mb-4">
+                    <button
+                        type="button"
+                        id="tab-account"
+                        class="active"
+                        onclick="switchTab('account')"
+                    >
+                        🏦 Bank Account
+                    </button>
+                    <button
+                        type="button"
+                        id="tab-duitnow"
+                        class="inactive"
+                        onclick="switchTab('duitnow')"
+                    >
+                        💳 DuitNow ID
+                    </button>
+                </div>
+
+                <!-- Search Input -->
+                <div class="relative">
+                    <input
+                        type="text"
+                        id="searchQuery"
+                        class="search-input"
+                        placeholder="Enter 10-16 digit account number"
+                    />
+                    <button
+                        type="submit"
+                        class="absolute right-2 top-1/2 -translate-y-1/2 gradient-orange-yellow text-white px-6 py-2 rounded-lg font-semibold hover:shadow-lg transition"
+                    >
+                        Search
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+            <div class="stat-card" style="border-top-color: #f59e0b;">
+                <div class="text-3xl font-bold" style="color: #f59e0b;">2.5M+</div>
+                <div class="text-gray-600 font-semibold mt-2">Searches</div>
+            </div>
+            <div class="stat-card" style="border-top-color: #ff8c42;">
+                <div class="text-3xl font-bold" style="color: #ff8c42;">15K+</div>
+                <div class="text-gray-600 font-semibold mt-2">Reported Accounts</div>
+            </div>
+            <div class="stat-card" style="border-top-color: #10b981;">
+                <div class="text-3xl font-bold" style="color: #10b981;">45K+</div>
+                <div class="text-gray-600 font-semibold mt-2">Verified Reports</div>
+            </div>
+            <div class="stat-card" style="border-top-color: #ef4444;">
+                <div class="text-3xl font-bold" style="color: #ef4444;">RM 250M+</div>
+                <div class="text-gray-600 font-semibold mt-2">Losses Reported</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="bg-gray-50 py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h3 class="text-4xl font-bold text-center text-black mb-12">How It Works</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h4 class="text-xl font-bold text-black mb-2">Search Account</h4>
+                    <p class="text-gray-600">Enter a bank account number or DuitNow ID to check its reputation</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚠️</div>
+                    <h4 class="text-xl font-bold text-black mb-2">View Risk Score</h4>
+                    <p class="text-gray-600">Get instant risk assessment based on community reports</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h4 class="text-xl font-bold text-black mb-2">Make Informed Decision</h4>
+                    <p class="text-gray-600">Review reports, categories, and decide safely</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="gradient-orange-yellow py-16">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+            <h3 class="text-4xl font-bold mb-4">Protect Your Community</h3>
+            <p class="text-lg mb-8 opacity-90">
+                Report scams and help others avoid fraud. Your report could save someone from losing money.
+            </p>
+            <button class="cta-button" onclick="alert('🚀 Report Scam Page Coming Soon!')">
+                Report a Scam →
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Product</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Search</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Report</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Premium</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">API</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Company</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">About</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Careers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Legal</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Terms</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Privacy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Disclaimer</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Appeal Process</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Community</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Status</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Support</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Guidelines</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 TrustTrack. All rights reserved.</p>
+                <p class="mt-2">Protecting Southeast Asian communities from fraud.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function switchTab(tab) {
+            const accountTab = document.getElementById('tab-account');
+            const duitnowTab = document.getElementById('tab-duitnow');
+            const searchInput = document.getElementById('searchQuery');
+            
+            if (tab === 'account') {
+                accountTab.classList.remove('inactive');
+                accountTab.classList.add('active');
+                duitnowTab.classList.remove('active');
+                duitnowTab.classList.add('inactive');
+                searchInput.placeholder = 'Enter 10-16 digit account number';
+            } else {
+                duitnowTab.classList.remove('inactive');
+                duitnowTab.classList.add('active');
+                accountTab.classList.remove('active');
+                accountTab.classList.add('inactive');
+                searchInput.placeholder = 'Enter DuitNow ID (NRIC/Passport)';
+            }
+        }
+        
+        function handleSearch(e) {
+            e.preventDefault();
+            const query = document.getElementById('searchQuery').value;
+            if (query.trim()) {
+                alert('🔍 Searching for: ' + query + '\n\nIn production, this would show results.');
+            } else {
+                alert('⚠️ Please enter a search query');
+            }
+        }
+    </script>
+</body>
+</html>
