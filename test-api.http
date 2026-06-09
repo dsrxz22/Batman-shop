@@ -1,0 +1,88 @@
+### Test API Health
+GET http://localhost:5000/api/health
+
+###
+### Test Single Fraud Prediction
+POST http://localhost:5000/api/predict
+Content-Type: application/json
+
+{
+  "transaction_id": "TXN-001",
+  "amount": 150.00,
+  "merchant_category": 1,
+  "transaction_type": 0,
+  "time_hour": 14,
+  "days_since_last_transaction": 5,
+  "transaction_count_24h": 3,
+  "amount_variance": 1.2,
+  "location_change": 0,
+  "device_change": 0,
+  "velocity_score": 50
+}
+
+###
+### Test Suspicious Transaction (High Amount, Unusual Time)
+POST http://localhost:5000/api/predict
+Content-Type: application/json
+
+{
+  "transaction_id": "TXN-002",
+  "amount": 800.00,
+  "merchant_category": 0,
+  "transaction_type": 0,
+  "time_hour": 3,
+  "days_since_last_transaction": 1,
+  "transaction_count_24h": 5,
+  "amount_variance": 2.5,
+  "location_change": 1,
+  "device_change": 1,
+  "velocity_score": 85
+}
+
+###
+### Test Batch Prediction
+POST http://localhost:5000/api/batch-predict
+Content-Type: application/json
+
+{
+  "transactions": [
+    {
+      "transaction_id": "TXN-003",
+      "amount": 200.00,
+      "merchant_category": 2,
+      "transaction_type": 1,
+      "time_hour": 10,
+      "days_since_last_transaction": 3,
+      "transaction_count_24h": 2,
+      "amount_variance": 1.1,
+      "location_change": 0,
+      "device_change": 0,
+      "velocity_score": 40
+    },
+    {
+      "transaction_id": "TXN-004",
+      "amount": 600.00,
+      "merchant_category": 5,
+      "transaction_type": 2,
+      "time_hour": 2,
+      "days_since_last_transaction": 7,
+      "transaction_count_24h": 10,
+      "amount_variance": 3.0,
+      "location_change": 1,
+      "device_change": 1,
+      "velocity_score": 90
+    }
+  ]
+}
+
+###
+### Get Statistics
+GET http://localhost:5000/api/stats
+
+###
+### Get Transaction History
+GET http://localhost:5000/api/history?limit=10
+
+###
+### Clear History
+POST http://localhost:5000/api/clear-history

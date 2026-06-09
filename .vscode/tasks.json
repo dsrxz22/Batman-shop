@@ -1,0 +1,117 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Setup: Install Dependencies",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "-c",
+        "python3 -m venv venv && source venv/bin/activate && pip install -r requirements.txt"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "Setup: Train ML Model",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "-c",
+        "source venv/bin/activate && python ml_model/train_model.py"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "Run: Flask Backend",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "-c",
+        "source venv/bin/activate && python backend/app.py"
+      ],
+      "isBackground": true,
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "^.*$",
+          "file": 1,
+          "location": 2,
+          "message": 3
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".*Running on.*",
+          "endsPattern": ".*"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "Run: Frontend Server",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "-c",
+        "cd frontend && python -m http.server 8000"
+      ],
+      "isBackground": true,
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "^.*$",
+          "file": 1,
+          "location": 2,
+          "message": 3
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "Serving HTTP.*",
+          "endsPattern": ".*"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "Run: Full Stack (Backend + Frontend)",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "-c",
+        "source venv/bin/activate && python backend/app.py & cd frontend && python -m http.server 8000"
+      ],
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "Test: Make API Request",
+      "type": "shell",
+      "command": "curl",
+      "args": [
+        "-X",
+        "GET",
+        "http://localhost:5000/api/health"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    }
+  ]
+}
